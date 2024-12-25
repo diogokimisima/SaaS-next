@@ -1,4 +1,10 @@
 {
     "extends": "@saas/tsconfig/node.json",
-    "include": ["src/**/*", "../../packages/auth/src/permissions.ts"],
+    "include": ["src/**/*"],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        }
+    }
 }

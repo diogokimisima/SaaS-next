@@ -10,7 +10,7 @@ datasource db {
 model User {
   id           String   @id @default(uuid())
   name         String?
-  email        String?  @unique
+  email        String   @unique
   passwordHash String?  @map("password_hash")
   avatarUrl    String?  @map("avatar_url")
   createdAt    DateTime @default(now()) @map("created_at")
@@ -33,7 +33,7 @@ enum TokenType {
 model Token {
   id        String    @id @default(uuid())
   type      TokenType
-  createdAt DateTime  @default(now())
+  createdAt DateTime  @default(now()) @map("created_at")
 
   user   User   @relation(fields: [userId], references: [id])
   userId String @map("user_id")
@@ -72,8 +72,8 @@ model Invite {
   author User?   @relation(fields: [userId], references: [id])
   userId String? @map("user_id")
 
-  organization   Organization? @relation(fields: [organizationId], references: [id])
-  organizationId String        @map("organization_id")
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String       @map("organization_id")
 
   @@unique([email, organizationId])
   @@index([email])
@@ -98,9 +98,9 @@ model Organization {
   id                        String   @id @default(uuid())
   name                      String
   slug                      String   @unique
-  domain                    String   @unique
-  shouldAttachUsersByDomain Boolean  @default(false)
-  avatarrUrl                String?  @map("avatar_url")
+  domain                    String?  @unique
+  shouldAttachUsersByDomain Boolean  @default(false) @map("should_attach_users_by_domain")
+  avatarUrl                 String?  @map("avatar_url")
   createdAt                 DateTime @default(now()) @map("created_at")
   updatedAt                 DateTime @updatedAt @map("updated_at")
 
@@ -115,14 +115,13 @@ model Organization {
 }
 
 model Project {
-  id                        String   @id @default(uuid())
-  name                      String
-  description               String
-  slug                      String   @unique
-  shouldAttachUsersByDomain Boolean  @default(false)
-  avatarrUrl                String?  @map("avatar_url")
-  createdAt                 DateTime @default(now()) @map("created_at")
-  updatedAt                 DateTime @updatedAt @map("updated_at")
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  slug        String   @unique
+  avatarUrl   String?  @map("avatar_url")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   organization   Organization @relation(fields: [organizationId], references: [id])
   organizationId String       @map("organization_id")

@@ -13,6 +13,7 @@ import {
 import { errorHandler } from '@/http/error-handler'
 import { getProfile } from '@/http/routes/auth/get-profile'
 
+import { authenticateWithGithub } from './routes/auth/authenticate-with-github'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-passoword'
 import { createAccount } from './routes/auth/create-account.'
 import { requestPasswordRecover } from './routes/auth/request-password-recover'
@@ -52,6 +53,7 @@ app.register(authenticateWithPassword)
 app.register(getProfile)
 app.register(requestPasswordRecover)
 app.register(resetPassword)
+app.register(authenticateWithGithub)
 
 app.listen({ port: 3333 }).then(() => {
   console.log('HTTP server running!')

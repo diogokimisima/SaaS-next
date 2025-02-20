@@ -8,9 +8,14 @@ import { Separator } from '@/components/ui/separator'
 
 import githubIcon from '../../../assets/github-icon.svg'
 
-export default function SignInPage() {
+export default function ForgotPasswordPassword() {
   return (
     <form action="" className="space-y-4">
+      <div className="space-y-1">
+        <Label htmlFor="name">Name</Label>
+        <Input name="name" id="name" />
+      </div>
+
       <div className="space-y-1">
         <Label htmlFor="email">E-mail</Label>
         <Input name="email" type="email" id="email" />
@@ -19,22 +24,24 @@ export default function SignInPage() {
       <div className="space-y-1">
         <Label htmlFor="password">Password</Label>
         <Input name="password" type="password" id="password" />
+      </div>
 
-        <Link
-          href="/auth/forgot-password"
-          className="text-foreground-muted text-xs font-medium hover:underline"
-        >
-          Forgot yout password
-        </Link>
+      <div className="space-y-1">
+        <Label htmlFor="password_confirmation">Confirm your password</Label>
+        <Input
+          name="password_confirmation"
+          type="password_confirmation"
+          id="password_confirmation"
+        />
       </div>
 
       <Button type="submit" className="w-full">
-        Sign in with e-mail
+        Create account
       </Button>
 
       <Button variant="link" className="w-full" asChild size="sm">
-        <Link href="/auth/sign-up" className="w-full">
-          Create new account
+        <Link href="/auth/sign-in" className="w-full">
+          Already registered? Sign in
         </Link>
       </Button>
 
@@ -42,7 +49,7 @@ export default function SignInPage() {
 
       <Button type="submit" variant="outline" className="w-full">
         <Image src={githubIcon} className="size-5 dark:invert" alt="" />
-        Sign in with Github
+        Sign up with Github
       </Button>
     </form>
   )
